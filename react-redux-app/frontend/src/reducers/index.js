@@ -1,10 +1,10 @@
 import apiReducer from './api.reducer';
-import counterReducer from './counter.reducer';
+import ddReducer from './dd.reducer';
 import {combineReducers} from 'redux'
 
-const combinedReducer = combineReducers({
-    apiReducer,
-    counterReducer
+const rootReducer = combineReducers({
+    cities: apiReducer,
+    dd: ddReducer
 });
 
-export default combinedReducer;
+export default rootReducer;

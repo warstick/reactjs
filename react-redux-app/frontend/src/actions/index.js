@@ -1,7 +1,7 @@
 import apiActions from './api.actions';
-import counterActions from './counter.actions';
+import ddActions from './dd.actions';
 
 export default {
-    ...apiActions,
-    ...counterActions
+    apiActions,
+    ddActions
 };

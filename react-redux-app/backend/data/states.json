@@ -1,16 +1,20 @@
 {
     "data": [
         {
-            "name": "California",
-            "shortDesc": "CA"
+            "city": "Los Angeles",
+            "state": "CA"
         },
         {
-            "name": "Oregon",
-            "shortDesc": "OR"
+            "city": "Portland",
+            "state": "OR"
         },
         {
-            "name": "North Carolina",
-            "shortDesc": "NC"
+            "city": "Charlotte",
+            "state": "NC"
+        },
+        {
+            "city": "Mooresville",
+            "state": "NC"
         }
     ]
 }
