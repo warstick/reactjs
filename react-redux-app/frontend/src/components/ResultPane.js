@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 function ResultPane({selectedState, selectedCity}) {
   return (
     <div className='selected-container'>
-          <label>Selected Country : </label><b>{selectedState}</b> <br/>
-          <label>Selected City : </label><b>{selectedCity}</b>
+          <label>Selected Country : </label><b data-testid="selected-state" >{selectedState}</b> <br/>
+          <label>Selected City : </label><b data-testid="selected-city" >{selectedCity}</b>
     </div>
   );
 };

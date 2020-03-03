@@ -12,7 +12,6 @@ function App() {
 
   const {states, selectedCity} = dropdownReducerState;
   const {cities, loaded, selectedState, error} = citiesReducerState;
-
   const dispatch = useDispatch();
 
   // intialize the event: Load the states
@@ -24,13 +23,16 @@ function App() {
     // trigger backend call...
     apiActions.loadCitiesByState(event.currentTarget.value, dispatch);
     // reset the already selected city value
-    dispatch(ddActions.selectCity(''))
+    dispatch(ddActions.selectCity(''));
   };
+
   return (
     <div className="App">
       <div>
         <label>Available States</label>
-        <select onChange={onStateChange} value={selectedState}>
+        <select data-testid="state-dd"
+        onChange={onStateChange}
+        value={selectedState}>
           <option value='' >Select State</option>
           {states.map((state, index) => (
             <option value={state} key={`state-options-${index}`} >
@@ -44,7 +46,7 @@ function App() {
         <div>
           <br /><br />
           <label>Available Cities</label>
-          <select onChange={(event) => dispatch(ddActions.selectCity(event.currentTarget.value))}>
+          <select data-testid="city-dd" onChange={(event) => dispatch(ddActions.selectCity(event.currentTarget.value))}>
             <option>Select Cities</option>
             {cities.map(({city}, index) => (
               <option value={city} key={`city-options-${index}`} >
