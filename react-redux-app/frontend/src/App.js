@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import actions from './actions';
 import './App.css';
+import ResultPane from './components/ResultPane';
 
 const {ddActions, apiActions} = actions;
 
@@ -59,13 +60,7 @@ function App() {
           {error.message}
         </div>
       }
-      {
-        !error && selectedState && selectedCity &&
-        <div className='selected-container'>
-          <label>Selected Country : </label><b>{selectedState}</b> <br/>
-          <label>Selected City : </label><b>{selectedCity}</b>
-        </div>
-      }
+      {!error && selectedState && selectedCity && <ResultPane />}
     </div>
   );
 }
