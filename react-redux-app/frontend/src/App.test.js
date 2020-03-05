@@ -8,6 +8,7 @@ import App from './App';
 import rootReducer from './reducers';
 
 jest.mock('axios');
+jest.setTimeout(30000);
 
 function renderWithRedux(
   ui,
@@ -48,22 +49,36 @@ test('renders City Dropdown Based on State Selection', async () => {
 
 test('renders Result Pane when you select the state and city', async () => {
   // setup
-  axios.get.mockImplementationOnce(() =>
-    Promise.resolve({ data: { "data": [{ "city": "Los Angeles", "state": "CA" }] } })
-  );
+  axios.get.mockImplementationOnce(() => {
+    return Promise.resolve({ data: { "data": [{ "city": "Los Angeles", "state": "CA" }] } })
+  })
+  .mockImplementationOnce(() => {
+    return Promise.resolve({ data: { "data": [{ "city": "Portland", "state": "OR" }] } })
+  });
   renderWithRedux(<App />)
 
   // set state as CA
   await fireEvent.change(screen.getByTestId("state-dd"), { target: { value: "CA" } });
 
   // Waiting for the changes to render when Calling API.
-  await wait(() => {
-    fireEvent.change(screen.getByTestId("city-dd"), { target: { value: "Los Angeles" } });
+  await wait(async () => {
+    await fireEvent.change(screen.getByTestId("city-dd"), { target: { value: "Los Angeles" } });
 
     expect(screen.getByTestId("selected-state")).toBeInTheDocument();
     expect(screen.getByTestId("selected-city")).toBeInTheDocument();
-
     expect(screen.getByTestId("selected-state")).toHaveTextContent('CA');
     expect(screen.getByTestId("selected-city")).toHaveTextContent('Los Angeles');
+
+    // Changing State from CA to OR
+    await fireEvent.change(screen.getByTestId("state-dd"), { target: { value: "OR" } });
+
+    await wait(async () => {
+      await fireEvent.change(screen.getByTestId("city-dd"), { target: { value: "Portland" } });
+
+      expect(screen.getByTestId("selected-state")).toBeInTheDocument();
+      expect(screen.getByTestId("selected-city")).toBeInTheDocument();
+      expect(screen.getByTestId("selected-state")).toHaveTextContent('OR');
+      expect(screen.getByTestId("selected-city")).toHaveTextContent('Portland');
+    });
   });
 });
