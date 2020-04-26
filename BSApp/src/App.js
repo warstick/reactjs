@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tabs } from 'antd';
 import Block from './components/block';
 import LatestBlock from './components/latestBlock';
@@ -8,8 +8,9 @@ import './App.css';
 const { TabPane } = Tabs;
 
 function App() {
+  const [currentTab, setCurrentTab] = useState(1);
   const callback = (key) => {
-    console.log(key);
+    setCurrentTab(key);
   };
 
   return (
@@ -22,7 +23,7 @@ function App() {
           <Transaction />
         </TabPane>
         <TabPane tab="Latest Block" key="3" style={{ height: 600 }}>
-          <LatestBlock />
+          {currentTab === '3' ? <LatestBlock /> : null}
         </TabPane>
       </Tabs>
     </div>
