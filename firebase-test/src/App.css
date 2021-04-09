@@ -57,6 +57,7 @@
 }
 .comments-btn {
   cursor: pointer;
+  font-weight: bold;
 }
 .comments-container {
   min-height: 100px;
