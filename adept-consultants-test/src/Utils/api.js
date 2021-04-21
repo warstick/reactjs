@@ -4,7 +4,7 @@ const baseUrl = 'https://hacker-news.firebaseio.com/v0';
 
 export const getTopStories = async (noOfStories) => {
     try {
-        const { data } = await axios.get(`${baseUrl}/askstories.json?print=pretty&orderBy="$key"&limitToFirst=${noOfStories || 10}`);
+        const { data } = await axios.get(`${baseUrl}/topstories.json?print=pretty&orderBy="$key"&limitToFirst=${noOfStories || 10}`);
 
         return { data };
     }
